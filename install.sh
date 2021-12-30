@@ -14,6 +14,6 @@ else
 fi
 
 cp .vimrc ~/
-cp nvim ~/ -r
+cp nvim ~/.config/ -r
 
 echo "done."
