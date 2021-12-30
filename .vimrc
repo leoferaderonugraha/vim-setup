@@ -11,6 +11,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter' 
 "Plug 'scrooloose/syntastic'
 Plug 'valloric/youcompleteme'
+Plug 'editorconfig/editorconfig-vim'
 
 " Themes
 Plug 'cormacrelf/vim-colors-github'
