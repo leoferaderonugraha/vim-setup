@@ -15,6 +15,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'airblade/vim-gitgutter' 
     Plug 'scrooloose/syntastic'
     Plug 'bfrg/vim-cpp-modern'
+    Plug 'octol/vim-cpp-enhanced-highlight'
     Plug 'editorconfig/editorconfig-vim'
     Plug 'jiangmiao/auto-pairs'
     Plug 'sheerun/vim-polyglot'
@@ -26,6 +27,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " HTML
     "Plug 'mattn/emmet-vim'
+    Plug 'github/copilot.vim'
     
 " Themes
     Plug 'cormacrelf/vim-colors-github'
@@ -34,11 +36,15 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/fcpg/vim-orbital'
     Plug 'https://github.com/wadackel/vim-dogrun'
     Plug 'https://github.com/altercation/vim-colors-solarized'
+    Plug 'arcticicestudio/nord-vim'
     
 " For working with flutter project
     Plug 'dart-lang/dart-vim-plugin'
     Plug 'natebosch/vim-lsc'
     "Plug 'natebosch/vim-lsc-dart'
+
+" Rust
+    Plug 'rust-lang/rust.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -102,6 +108,10 @@ nnoremap df :DartFmt<CR>
 " ---------- CoC autocomplete config ----------
 " symbol rename
 nmap <Space>rn <Plug>(coc-rename)
+nmap <silent> <Space>d <Plug>(coc-definition)
+nmap <silent> <Space>i <Plug>(coc-implementation)
+nmap <silent> <Space>r <Plug>(coc-references)
+nmap <silent> <Space>t <Plug>(coc-type-definition)
 inoremap <silent><expr> <C-Space> coc#refresh()
 set completeopt=menu
 " ----------
@@ -137,6 +147,12 @@ map <F2> :mksession! ~/.vim_session <CR>
 map <F3> :source ~/.vim_session <CR>     
 
 
+" ---------- Utils ----------
+"
+" Open windows
+map <C-l> :Windows<CR>
+
+
 syntax on
 set tabstop=4
 set softtabstop=4
@@ -146,6 +162,7 @@ set number
 
 
 set autoread " Enable auto reload file
+set nowrap " Disable auto-wrap
 " Exit insert/edit mode
 inoremap jl <ESC>
 
@@ -155,13 +172,23 @@ inoremap jl <ESC>
 map <C-c> :%y+<CR>
 
 " ---------- UI ----------
-colorscheme challenger_deep
+" colorscheme challenger_deep
+" colorscheme dogrun
+colorscheme iceberg
 set background=dark
-set colorcolumn=80 " Max line length
+set colorcolumn=80,100 " Max line length
 set cursorline " Highlight current line
-let g:airline_theme='tomorrow'
+set termguicolors " Enable 24-bit RGB colors
+let g:airline_theme='night_owl'
 let g:NERDTreeHijackNetrw=1 " Disable NERDTree on startup
 
 " ---------- File types configuration ----------
 autocmd FileType dart setlocal shiftwidth=2 tabstop=2 expandtab
 autocmd FileType js setlocal shiftwidth=2 tabstop=2 expandtab
+
+" Development
+" let g:fzf_action = {'enter': 'tab split'}
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
+let g:rustfmt_autosave = 1
+let g:rustfmt_emit_files = 1
+let g:rustfmt_fail_silently = 0
